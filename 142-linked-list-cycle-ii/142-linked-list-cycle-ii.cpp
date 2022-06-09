@@ -11,26 +11,24 @@ public:
     ListNode *detectCycle(ListNode *head) {
         ListNode* p = head;
         ListNode* q = head;
-        unordered_map<ListNode*, int>m;
         if(!head || !head->next){
-            return nullptr;
+            return NULL;
         }
-       while(p){
-            if(m.find(p->next) != m.end()){
-                auto it = m.find(p->next);
-                return it->first;
+        while(q && q->next){
+            q= q->next->next;
+            p=p->next;
+            if(p==q){
+                break;
             }
-            else{
-            m.insert({p,p->val});
-            }
-           p=p->next;
-       }
-           
-       // p->next = nullptr;
-       // cout<<p->val<<endl;
-       
-            return nullptr;
-        
-        
+        }
+        if(p!=q){
+            return NULL;
+        }
+        p =head;
+        while(p != q){
+            p=p->next;
+            q=q->next;
+        }
+        return p;
     }
 };
