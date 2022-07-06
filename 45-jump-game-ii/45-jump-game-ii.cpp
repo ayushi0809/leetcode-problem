@@ -6,13 +6,16 @@ public:
             return 0;
         if(dp[i] != -1) return dp[i];
         int ans = 1e9;
-        for(int j= i+1; j<=i+nums[i];j++){
-            ans = min(ans, 1+f(nums, j,n,dp));
+        for(int j= 1; j<=nums[i];j++){
+            int x = 1+f(nums, i+j, n, dp);
+            ans = min(ans ,x);
         }
         return dp[i] = ans;
     }
     int jump(vector<int>& nums) {
-        vector<int>dp(nums.size(),-1);
-        return f(nums,0,nums.size(),dp);
+        int n = nums.size();
+        vector<int>dp(n,-1);
+        return f(nums, 0,n,dp);
+        
     }
 };
