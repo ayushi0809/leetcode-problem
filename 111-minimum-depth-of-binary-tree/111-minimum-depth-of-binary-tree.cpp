@@ -16,9 +16,7 @@ public:
             return 1e9;
         if(!root->left && !root->right)
             return 1;
-        int l = f(root->left);
-        int r = f(root->right);
-        return min(l,r)+1;
+        return min(f(root->left),f(root->right))+1;
     }
     int minDepth(TreeNode* root) {
         if(root==NULL)
