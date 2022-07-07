@@ -1,24 +1,42 @@
 class Solution {
 public:
+    // bool f(int i, vector<vector<int>>& graph, vector<int> &color ){
+    //     queue<int>q;
+    //     color[i] =1;
+    //     q.push(i);
+    //     while(!q.empty()){
+    //         int x = q.front();
+    //         q.pop();
+    //         for(auto a: graph[x]){
+    //             if(color[a] == -1){
+    //                 color[a] = 1-color[x];
+    //                 q.push(a);
+    //             }
+    //             else if(color[a] == color[x]){
+    //                 return false;
+    //             }
+    //         }
+    //     }
+    //     return true;
+    // }
     bool f(int i, vector<vector<int>>& graph, vector<int> &color ){
-        queue<int>q;
-        color[i] =1;
-        q.push(i);
-        while(!q.empty()){
-            int x = q.front();
-            q.pop();
-            for(auto a: graph[x]){
+        if(color[i]==-1)
+            color[i] =1;
+            for(auto a: graph[i]){
                 if(color[a] == -1){
-                    color[a] = 1-color[x];
-                    q.push(a);
+                    color[a] = 1- color[i];
+                    if(!f(a,graph,color))
+                        return false;
+                    
                 }
-                else if(color[a] == color[x]){
+                else if(color[a] == color[i]){
                     return false;
                 }
             }
-        }
+        
         return true;
     }
+    
     bool isBipartite(vector<vector<int>>& graph) {
         int n = graph.size();
         bool t = true;
