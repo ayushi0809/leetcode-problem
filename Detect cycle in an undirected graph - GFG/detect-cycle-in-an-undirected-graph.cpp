@@ -6,22 +6,36 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
-    bool cyclebfs(int i , vector<int> adj[], vector<bool>&visited ){
-        queue<pair<int,int>>q;
-        q.push({i,-1});
+    // bool cyclebfs(int i , vector<int> adj[], vector<bool>&visited ){
+    //     queue<pair<int,int>>q;
+    //     q.push({i,-1});
+    //     visited[i] = true;
+    //     while(!q.empty()){
+    //         int v = q.front().first;
+    //         int prev = q.front().second;
+    //         q.pop();
+    //         for(auto a : adj[v]){
+    //             if(!visited[a]){
+    //                 visited[a]=true;
+    //                 q.push({a,v});
+    //             }
+    //             else if(prev != a){
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+    bool cycledfs(int i, int parent, vector<int>adj[], vector<bool> &visited){
         visited[i] = true;
-        while(!q.empty()){
-            int v = q.front().first;
-            int prev = q.front().second;
-            q.pop();
-            for(auto a : adj[v]){
-                if(!visited[a]){
-                    visited[a]=true;
-                    q.push({a,v});
-                }
-                else if(prev != a){
-                    return true;
-                }
+        for(auto a: adj[i]){
+            if(!visited[a]){
+                //visited[a] = true;
+                if(cycledfs(a,i,adj,visited)) return true;
+            }
+            else if( a != parent){
+                return true;
+                //break;
             }
         }
         return false;
@@ -32,7 +46,7 @@ class Solution {
         vector<bool>visited(V+1, false);
         for(int i =0; i<V; i++){
             if(!visited[i]){
-                if(cyclebfs(i, adj, visited))
+                if(cycledfs(i, -1, adj, visited))
                 return true;
             }
         }
