@@ -10,21 +10,39 @@
  */
 class Solution {
 public:
+    ListNode* findmid(ListNode* head){
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+    ListNode* sort(ListNode* a, ListNode* b){
+       if(!a)return b;
+        if(!b)return a;
+        ListNode *ans;
+        if(a->val<b->val){
+            ans=a;
+            ans->next=sort(a->next,b);
+        }
+        else
+        {
+            ans=b;
+            ans->next=sort(a,b->next);
+        }
+        return ans;
+    }
     ListNode* sortList(ListNode* head) {
-     vector<int>v;
-        ListNode* q = head;
-        while(q != NULL){
-            v.push_back(q->val);
-            q=q->next;
-        }
-        sort(v.begin(), v.end());
-        ListNode* p = new ListNode();
-        q=p;
-        for(int i=0; i<v.size(); i++){
-            ListNode* x = new ListNode(v[i]);
-            q->next = x;
-            q=q->next;
-        }
-        return p->next;
+        if(!head || !head->next)
+            return head;
+        ListNode* mid  = findmid(head);
+        ListNode* midNext = mid->next;
+        mid->next = NULL;
+        head = sortList(head);
+        midNext = sortList(midNext);
+        return sort(head, midNext);
+        
     }
 };
