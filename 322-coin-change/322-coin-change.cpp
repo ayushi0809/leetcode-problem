@@ -1,5 +1,7 @@
 class Solution {
 public:
+        //memoization
+
     // int f(int i, int amount, vector<int>& coins, vector<vector<int>>&dp){
     //     if(i==0){
     //         if(amount%coins[0] ==0)
@@ -14,6 +16,8 @@ public:
     //     }
     //     return dp[i][amount] = min(notake,take);
     // }
+  // --------------------------------- //---------------------------------------------
+    //tabulation
     int coinChange(vector<int>& coins, int amount) {
         int n = coins.size();
         vector<vector<int>>dp(n, vector<int>(amount+1,1e9));
