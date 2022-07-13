@@ -11,19 +11,24 @@
  */
 class Solution {
 public:
-    // int height(TreeNode* root){
-    //     if(root == NULL)
-    //         return 0;
-    //     return max(height(root->left), height(root->right))+1;
-    // }
+    int leftheight(TreeNode* root){
+        if(root == NULL)
+            return 0;
+        return 1+leftheight(root->left);
+    }
+    int rightheight(TreeNode* root){
+         if(root == NULL)
+            return 0;
+        return 1+rightheight(root->right);
+    }
     int count =0;
     int countNodes(TreeNode* root) {
-       if(root != NULL){
-           countNodes(root->left);
-           count++;
-           countNodes(root->right);
-           return count;
-       }
-        return count;
+      if(root == NULL)
+          return 0;
+        int l = leftheight(root);
+        int r = rightheight(root);
+        if(l==r)
+            return pow(2,l)-1;
+        return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
