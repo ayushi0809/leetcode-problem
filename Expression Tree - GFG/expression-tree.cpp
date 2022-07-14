@@ -44,34 +44,49 @@ class Solution{
     }
     int evalTree(node* root) {
         // Your code here
-        stack<int>st;
-        postorder(root);
-        //cout<<s<<endl;
-        for(auto x : s){
-            if(x != "+" && x != "-" && x != "*" && x != "/"){
-                //cout<<x-'0'<<endl;
-                st.push(stoi(x));
-            }
-            else{
-                int r = st.top();
-                st.pop();
-                int l = st.top();
-                st.pop();
-                if(x=="+"){
-                    st.push(l+r);
-                }
-                else if(x=="-"){
-                    st.push(l-r);
-                }
-                else if(x=="*"){
-                    st.push(l*r);
-                }
-                else{
-                    st.push(l/r);
-                }
-            }
-        }
-        return st.top();
+        if(!root)
+        return 0;
+        if(!root->left && !root->right)
+        return (stoi(root->data));
+        int l = evalTree(root->left);
+        int r = evalTree(root->right);
+        
+        if(root->data == "+")
+        return l+r;
+        else if(root->data=="-")
+        return l-r;
+        else if(root->data == "*")
+        return l*r;
+        else
+        return l/r;
+        // stack<int>st;
+        // postorder(root);
+        // //cout<<s<<endl;
+        // for(auto x : s){
+        //     if(x != "+" && x != "-" && x != "*" && x != "/"){
+        //         //cout<<x-'0'<<endl;
+        //         st.push(stoi(x));
+        //     }
+        //     else{
+        //         int r = st.top();
+        //         st.pop();
+        //         int l = st.top();
+        //         st.pop();
+        //         if(x=="+"){
+        //             st.push(l+r);
+        //         }
+        //         else if(x=="-"){
+        //             st.push(l-r);
+        //         }
+        //         else if(x=="*"){
+        //             st.push(l*r);
+        //         }
+        //         else{
+        //             st.push(l/r);
+        //         }
+        //     }
+        // }
+        // return st.top();
        
     }
 };
