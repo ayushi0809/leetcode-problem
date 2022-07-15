@@ -10,27 +10,17 @@
  */
 class Solution {
 public:
-    int len(ListNode* head){
-        int count =0;
-        while(head != NULL){
-             count++;
-            head = head->next;
-        }
-         return count;  
-    }
+   
     ListNode* middleNode(ListNode* head) {
         ListNode* slow = head;
         ListNode* fast = head;
-        ListNode* p = head;
-        int count =len(p);
-        while(fast->next != NULL && fast->next->next != NULL){
+        
+        while(fast != NULL && fast->next != NULL){
             
             slow =slow->next;
             fast = fast->next->next;
         }
-        cout<<count<<endl;
-       if(count%2==0)
-        return slow->next;
+       
         return slow;
     }
 };
