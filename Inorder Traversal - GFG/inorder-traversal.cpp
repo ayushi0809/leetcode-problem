@@ -33,14 +33,30 @@ class Solution {
   public:
     // Function to return a list containing the inorder traversal of the tree.
     
-    vector<int>v;
+    
     vector<int> inOrder(Node* root) {
         // Your code here
-        if(root != NULL){
-            inOrder(root->left);
-            v.push_back(root->data);
-            inOrder(root->right);
-        }
+        // if(root != NULL){
+        //     inOrder(root->left);
+        //     v.push_back(root->data);
+        //     inOrder(root->right);
+        // }
+        vector<int>v;
+        stack<Node*>st;
+        //st.push(root);
+        Node* p = root;
+        while(!st.empty() || p != NULL){
+          while(p){
+              st.push(p);
+              p=p->left;
+          }
+          Node* x = st.top();
+          st.pop();
+          v.push_back(x->data);
+          p=x->right;
+           
+            }
+        
         return v;
     }
 };
