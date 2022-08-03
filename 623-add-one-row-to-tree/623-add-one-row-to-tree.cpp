@@ -12,35 +12,29 @@
 class Solution {
 public:
     unordered_map<TreeNode*, int>m;
-    void f(TreeNode* root, int d){
+    void f(TreeNode* root, int d, int val, int depth){
         if(root==NULL)
             return;
-        m[root] = d;
-        f(root->left, d+1);
-        f(root->right, d+1);
-    
+        if(d==depth-1){
+            TreeNode* left = root->left;
+            TreeNode* right = root->right;
+            root->left = new TreeNode(val);
+            root->left->left= left;
+            root->right = new TreeNode(val);
+            root->right->right = right;
+        }
+        else{
+            f(root->left, d+1, val,depth);
+            f(root->right, d+1, val,depth);
+        }
     }
     TreeNode* addOneRow(TreeNode* root, int val, int depth) {
-        f(root,1);
         if(depth ==1){
             TreeNode* node = new TreeNode(val);
             node->left = root;
             return node;
         }
-        for(auto it = m.begin(); it !=m.end(); it++){
-            if(it->second==depth-1){
-                TreeNode* node = it->first;
-                cout<<node->val<<endl;
-                TreeNode* left = node->left;
-                TreeNode* right = node->right;
-                TreeNode* l = new TreeNode(val);
-                TreeNode* r = new TreeNode(val);
-                node->left = l;
-                node->right = r;
-                l->left = left;
-                r->right = right;
-            }
-        }
+        f(root, 1, val,depth);
         return root;
     }
 };
