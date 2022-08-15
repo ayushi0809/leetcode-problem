@@ -2,8 +2,8 @@ class Solution {
 public:
     int n,m;
     vector<int>delta = {0,1,0,-1,0};
-    void dfs(int row, int col, vector<vector<int>>& grid){
-        int count = 0;
+    void dfs(int row, int col, vector<vector<int>>& grid,int count){
+        count = 0;
         grid[row][col] = -grid[row][col];
         for(int i =0; i<4; i++){
             int r = row+delta[i];
@@ -14,10 +14,11 @@ public:
                 }
                 if(-grid[row][col] == grid[r][c]){
                     count=count+1;
-                    dfs(r,c,grid);
+                    dfs(r,c,grid,count);
                 }
             }
         }
+        cout<<count<<endl;
         if(count==4){
             grid[row][col] =-grid[row][col];
         }
@@ -26,7 +27,7 @@ public:
     vector<vector<int>> colorBorder(vector<vector<int>>& grid, int row, int col, int color) {
         n = grid.size();
         m = grid[0].size();
-        dfs(row,col,grid);
+        dfs(row,col,grid,0);
         
         for(int i =0; i<n; i++){
             for(int j =0; j<m; j++){
