@@ -15,9 +15,9 @@ public:
         while(!pq.empty()){
             auto it = pq.top();
             pq.pop();
-            if(it.second.first == n-1 && it.second.second == m-1){
-                return v[n-1][m-1];
-            }
+            // if(it.second.first == n-1 && it.second.second == m-1){
+            //     return v[n-1][m-1];
+            // }
             for(auto x : delta){
                 int r = it.second.first+x[0];
                 int c = it.second.second+x[1];
