@@ -17,7 +17,7 @@ public:
         while(!q.empty()){
             auto it = q.front();
             q.pop();
-            cout<<it.first.first <<" "<<it.first.second<<endl;
+            // cout<<it.first.first <<" "<<it.first.second<<endl;
             if(it.first.first == n-1 && it.first.second == m-1){
                 return it.second;
             }
@@ -25,6 +25,7 @@ public:
                 int r = it.first.first+x[0];
                 int c = it.first.second+x[1];
                 if(r>=0 && r<n && c>=0 && c<m && grid[r][c] == 0){
+                    
                     grid[r][c] = -1;
                     q.push({{r,c},it.second+1});
                 }
