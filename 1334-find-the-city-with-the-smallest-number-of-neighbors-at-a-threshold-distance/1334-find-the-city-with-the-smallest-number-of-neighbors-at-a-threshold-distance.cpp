@@ -2,7 +2,7 @@ class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
         
-        vector<vector<int>>adj(n, vector<int>(n, int(1e6)));
+        vector<vector<int>>adj(n, vector<int>(n, (1e6)));
         for(int i =0; i<edges.size(); i++){
             int u = edges[i][0];
             int v = edges[i][1];
