@@ -1,29 +1,18 @@
 class Solution {
 public:
     string removeStars(string s) {
-        size_t found = s.find('*');
-        cout<<found<<endl;
-        if(found == 18446744073709551615){
-            return s;
+        stack<char> st;
+        for(auto c: s){
+            if(c == '*'){
+                st.pop();
+            }else st.push(c);
         }
-        stack<char>st;
-        for(auto a : s){
-            if(a == '*'){
-                if(!st.empty()){
-                    st.pop();
-                }
-            }
-            else{
-                st.push(a);
-            }
-        }
-        string ans = "";
-        
+        int i = st.size()-1;
+        string ans(st.size(), '*');
         while(!st.empty()){
-            ans = st.top()+ans;
+            ans[i--] = st.top();
             st.pop();
         }
-        
         return ans;
     }
 };
