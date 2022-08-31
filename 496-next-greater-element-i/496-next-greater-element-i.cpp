@@ -12,8 +12,8 @@ public:
            while(!st.empty() && nums2[st.top()]<= nums2[i]){
                st.pop();
            }
-            if( !st.empty() && m.find(nums2[i]) != m.end()){
-                auto it = m.find(nums2[i]);
+            auto it = m.find(nums2[i]);
+            if( !st.empty() && it != m.end()){
                 ans[it->second] = nums2[st.top()];
             }
             st.push(i);
