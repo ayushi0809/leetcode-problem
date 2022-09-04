@@ -38,8 +38,10 @@ public:
             sort(it.second.begin(), it.second.end());
             vector<int>v;
             for(auto x : it.second){
+                cout<<x.first<<" "<<x.second<<endl;
                 v.push_back(x.second);
             }
+            cout<<"next level"<<endl;
             ans.push_back(v);
         }
      return ans;   
