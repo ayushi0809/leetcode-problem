@@ -1,63 +1,48 @@
-class Solution
-{
-    public:
-        string minWindow(string s, string t)
-        {
-            if (s.length() < t.length())
-            {
-                return ""; // impossible task
-            }
-                
-
-            int n = s.size();
-            unordered_map<char, int> mpp;
-
-            int i = 0, j = 0;
-
-            for (int i = 0; i < t.size(); i++)
-            {
-                mpp[t[i]]++; 
-            }
-
-            int count = mpp.size();
-            int res = INT_MAX;
-
-            string ans = "";
-
-            while (j < n)
-            {
-                mpp[s[j]]--; 
-                if (mpp[s[j]] == 0)
-                    count--; 
-
-                if (count == 0) 
-                {
-                    while (count == 0) 
-                    {
-                        if (j - i + 1 < res)
-                        {
-                            res = j - i + 1;
-                            ans = s.substr(i, res);
-                        }
-                        
-                        if(mpp.find(s[i])!=mpp.end())
-                        mpp[s[i]]++; 
-
-                        if (mpp[s[i]] == 1)
-                        {
-                            count++; 
-                        }
-
-                        i++;
-                    }
-                }
-                j++;
-            }
-            
-            if(res == INT_MAX)
-            {
-                return "";
-            }
-            return ans;
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char,int>frq;
+        
+        for(auto a : t){
+            frq[a]++;
         }
+        unordered_map<char,int>m;
+        
+        int i =0;
+        int j =0;
+        int required = frq.size();
+        int current = 0;
+        int count = INT_MAX;
+        int n = s.size();
+        string ans = "";
+        int start; 
+        int end;
+        while(j<n){
+            m[s[j]]++;
+            if(frq.find(s[j]) != frq.end() && frq[s[j]] == m[s[j]]){
+                current++;
+            }
+            while(current == required){
+                if(j-i+1<count){
+                    count = j-i+1;
+                    start = i;
+                    end = j;
+                }
+                //cout<<s[i]<<endl;
+                m[s[i]]--;
+            if(frq.find(s[i]) != frq.end() && frq[s[i]] > m[s[i]]){
+                //cout<<"hehe"<<endl;
+                current--;
+            }
+                    i++;
+                }
+            
+            j++;
+        }
+        if(count != INT_MAX){
+            ans = s.substr(start,count);
+        }
+        return ans;
+        
+    }
 };
