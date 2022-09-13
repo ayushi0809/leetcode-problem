@@ -1,28 +1,24 @@
 class Solution {
 public:
-    unsigned long long int binomialCoeff(int n, int k)
-{
-    unsigned long long int C[n + 1][k + 1];
-    int i, j;
- 
-    // Calculate value of Binomial Coefficient
-    // in bottom up manner
-    for (i = 0; i <= n; i++) {
-        for (j = 0; j <= min(i, k); j++) {
-            // Base Cases
-            if (j == 0 || j == i)
-                C[i][j] = 1;
- 
-            // Calculate value using previously
-            // stored values
-            else
-                C[i][j] = C[i - 1][j - 1] + C[i - 1][j];
-        }
-    }
- 
-    return C[n][k];
-}
     int uniquePaths(int m, int n) {
-        return int(binomialCoeff(m+n-2, m-1));
+        vector<vector<int>>dp(m,vector<int>(n,0));
+        dp[0][0] =1;
+        
+        for(int i =0; i<n; i++){
+            dp[0][i] = 1;
+            
+        }
+        for(int i =0 ; i<m; i++){
+            dp[i][0] = 1;
+        }
+        
+        for(int i =1; i<m; i++){
+            for(int j=1; j<n; j++){
+                dp[i][j] = dp[i][j-1]+dp[i-1][j];
+            }
+        }
+        
+        return dp[m-1][n-1];
+        
     }
 };
