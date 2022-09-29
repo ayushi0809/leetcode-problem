@@ -1,44 +1,45 @@
 class Solution {
 public:
-    int m,n;
-    void dfs(int row, int col, vector<vector<char>>& baord){
-        //ut<<row<<" "<<col<<endl;
-        if(row<0 || row>=n || col<0 || col>=m || baord[row][col] == 'X' || baord[row][col]=='$'){
+    int m ,n;
+    void dfs(int row, int col, vector<vector<char>>&board, vector<vector<bool>>&vis){
+       // cout<<row<<" "<<col<<endl;
+        if(row<0 || row>=m || col<0 || col>=n || board[row][col] == 'X' || vis[row][col] == true  ){
             return;
         }
-        baord[row][col]='$';
-      
-        dfs(row-1, col,baord);
-        dfs(row+1,col,baord);
-        dfs(row, col+1, baord);
-        dfs(row, col-1, baord);
+        vis[row][col] = true;
+        board[row][col] = '$';
+       // cout<<m<<" "<<n<<endl;
+        dfs(row, col-1, board,vis);
+        dfs(row, col+1, board,vis);
+        dfs(row-1, col, board,vis);
+        dfs(row+1, col, board,vis);
     }
     void solve(vector<vector<char>>& board) {
-        n = board.size();
-        m = board[0].size();
-        vector<vector<int>>v(n, vector<int>(m,0));
-        for(int i =0; i<n; i++){
-            for(int j =0; j<m; j++){
-                if(i==0 || i==n-1){
-                    dfs(i,j,board);
+        m = board.size();
+        n = board[0].size();
+        vector<vector<bool>>vis(m, vector<bool>(n,false));
+        for(int i =0; i<m; i++){
+            for(int j =0; j<n; j++){
+                if(board[i][j] == 'O' && !vis[i][j]){
+                if(i==0 || i==m-1){
+                    dfs(i,j,board,vis);
                 }
-                else{
-                    dfs(i,0,board);
-                    dfs(i,m-1,board);
+                if(j==0 || j==n-1 ){
+                    dfs(i,j,board,vis);
                 }
             }
+            }
         }
-         for(int i =0; i<n; i++){
-            for(int j =0; j<m; j++){
-                if(board[i][j]=='$'){
-                    board[i][j]= 'O';
+        for(int i =0; i<m; i++){
+            for(int j =0; j<n; j++){
+                if(board[i][j] == '$'){
+                    board[i][j] = 'O';
                 }
                 else{
-                                        board[i][j]= 'X';
-
+                    board[i][j] = 'X';
                 }
             }}
-            
-            
+        
+        //return board;
     }
 };
