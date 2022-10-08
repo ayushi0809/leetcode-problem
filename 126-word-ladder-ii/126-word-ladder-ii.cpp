@@ -34,7 +34,6 @@ public:
             level=q.front().second;
             q.pop();
             //used.clear();
-            cout<<word<<" "<<level<<endl;
            m[word]=level;
             if(word==endWord){
                 break;
@@ -54,10 +53,7 @@ public:
             
         }
        // cout<<m[wordList[0]]<<endl;
-        for(auto it = m.begin(); it!=m.end(); it++){
-            cout<<it->first<<" "<<it->second<<endl;
-        }
-        
+       
         dfs(endWord,{},m[endWord],beginWord);
         return ans;
     
