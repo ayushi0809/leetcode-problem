@@ -26,7 +26,7 @@ public:
         int left =0;
         int right =0;
         if(dp[n]!=-1){
-            cout<<dp[n]<<endl;
+            //cout<<dp[n]<<endl;
             return dp[n];
         }
         if(s[0]!=0)
@@ -34,16 +34,15 @@ public:
         if(s[0] !=0 && stoi(s.substr(0,2))<=26)
             right = numDecod(dp,s.substr(2));
        
-         dp[n] = left+right;
-        cout<<dp[n]<<endl;
-        return left+right;
+        return dp[n] = left+right;
        
     }
     int numDecodings(string s) {
         vector<int> dp(s.size()+1,-1);
         dp[0]=0;
-        int t = numDecod(dp,s);
-        return dp[s.size()];
+        
+         int t = numDecod(dp,s);
+         return dp[s.size()];
        
     }
 };
