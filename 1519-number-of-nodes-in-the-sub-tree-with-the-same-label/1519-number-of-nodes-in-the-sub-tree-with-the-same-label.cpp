@@ -1,13 +1,7 @@
 class Solution {
 public:
     vector<int> dfs(int curr, int parent, vector<int>adj[], string &labels, vector<int> &ans ){
-        if(adj[curr].size()==0){
-            char ch = labels[curr];
-            vector<int>v(26,0);
-            v[ch-'a']++;
-            ans[curr] = 1;
-            return v;
-        }
+        
         vector<int>v1(26,0);
        for(auto it : adj[curr]){
            if(it != parent){
