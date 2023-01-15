@@ -2,8 +2,8 @@ class Solution {
 public:
     int maxchain = INT_MIN;
     int dfs(int curr, int parent, vector<int>adj[], string &s){
-        int longestchain = -1;
-        int secondlongestchain = -1;
+        int longestchain = 0;
+        int secondlongestchain = 0;
         for(auto it : adj[curr]){
             int ht = dfs(it,curr,adj,s);
             if(s[it] == s[curr]){
@@ -19,7 +19,7 @@ public:
             }
         }
         
-        maxchain  = max(maxchain, longestchain+secondlongestchain+2);
+        maxchain  = max(maxchain, longestchain+secondlongestchain+1);
         
         return longestchain+1;
         
@@ -37,7 +37,7 @@ public:
         
         dfs(0,-1,adj,s);
         
-        return maxchain+1;
+        return maxchain;
         
         
     }
