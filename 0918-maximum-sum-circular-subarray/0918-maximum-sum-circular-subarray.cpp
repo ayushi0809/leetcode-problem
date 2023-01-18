@@ -2,32 +2,39 @@ class Solution {
 public:
     int maxSubarraySumCircular(vector<int>& nums) {
         int n = nums.size();
-        
-        for(int i =0; i<n; i++){
-            nums.push_back(nums[i]);
-        }
-        vector<int>prefix(2*n);
-        
-        prefix[0] = nums[0];
-        //cout<<nums.size()<<endl;
-        for(int i =1; i< 2*n; i++){
-            //cout<<i<<endl;
-            prefix[i] = prefix[i-1]+nums[i];
-        }
-        deque<int>dq;
-        dq.push_back(0);
-        int ans = prefix[0];
-        for(int j =1; j<2*n; j++){
-            if(dq.front()<j-n)
-                dq.pop_front();
-            ans = max(ans, prefix[j]-prefix[dq.front()]);
-            cout<<ans<<endl;
-            while(!dq.empty() && prefix[j]<=prefix[dq.back()]){
-                dq.pop_back();
+        int i =0;
+        int sum =0;
+        int maxsum = INT_MIN;
+        while(i<n){
+            sum = sum+nums[i];
+            maxsum = max(maxsum,sum);
+            if(sum<0){
+                sum =0;
             }
-            dq.push_back(j);
-            
+            i++;
         }
-        return ans;
+        
+        vector<int>pre(n);
+        pre[0] = nums[0];
+        vector<int>suf(n);
+        suf[n-1] = nums[n-1];
+         sum = nums[0];
+        for(int i =1; i<n; i++){
+            sum = sum+nums[i];
+            pre[i] = max(sum,pre[i-1]);
+        }
+        
+         sum = nums[n-1];
+        for(int i = n-2; i>=0; i--){
+            sum = sum+nums[i];
+            suf[i] = max(sum,suf[i+1]);
+        }
+        
+        for(int i =0; i<n-1; i++){
+            maxsum = max(maxsum, pre[i]+suf[i+1]);
+        }
+        
+        return maxsum;
+        
     }
 };
