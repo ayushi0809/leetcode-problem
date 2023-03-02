@@ -1,63 +1,69 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
-       vector<char>s;
-        int start =0;
-        int end = 1;
-        char ch = chars[start];
-        int n = chars.size();
-        if(n==1){
+        vector<char>v;
+        char a = chars[0];
+        int count = 1;
+        int ans =0;
+        int i = 1;
+        if(chars.size()==1){
             return 1;
         }
-        // char t = 1+'0';
-        //     cout<<t<<endl;
-        while(end<n){
-            if(ch != chars[end]){
-                int len = end-start;
-                if(len==1){
-                    s.push_back(ch);
-                }
-                else if(len<=9){
-                    s.push_back(ch);
-                    s.push_back(len+'0');
-                }
-                else{
-                    string a = to_string(len);
-                    s.push_back(ch);
-                    int j =0;
-                    while(j<a.size()){
-                        s.push_back(a[j]);
-                        j++;
-                    }
-                }
+        while(i<=chars.size()){
+           // cout<<i<<endl;
+             count = 1;
+            while( i<chars.size() && a == chars[i]){
                 
-                start = end;
-                
+               i++;
+                count++;
+                //cout<<i<<endl;
             }
-            ch = chars[end];
-            end++;
+            cout<<i<<endl;
+            string s = to_string(count);
+            if(count == 1){
+                v.push_back(a);
+                ans = ans+1;
+            }
+            else{
+                v.push_back(a);
+                int j =0;
+                while(j<s.size()){
+                    v.push_back(s[j]);
+                    j++;
+                }
+                ans = ans+1+s.size();
+            }
+            //cout<<i<<endl;
+            //i = i+count;
+            
+           if(i<chars.size()){
+           a = chars[i];
+           }
+            i=i+1;
+            //cout<<i<<endl;
+           
         }
-        //cout<<chars[end]<<endl;
-                int len = end-start;
-                if(len==1){
-                    s.push_back(ch);
-                }
-                else if(len<=9){
-                    s.push_back(ch);
-                    s.push_back(len+'0');
-                }
-                else{
-                    string a = to_string(len);
-                    s.push_back(ch);
-                    int j =0;
-                    while(j<a.size()){
-                        s.push_back(a[j]);
-                        j++;
-                    }
-                }
+        // string s = to_string(count);
+        // cout<<count<<endl;
+        //     if(count == 1){
+        //         v.push_back(a);
+        //         ans = ans+1;
+        //     }
+        //     else{
+        //         v.push_back(a);
+        //         int j =0;
+        //         while(j<s.size()){
+        //             v.push_back(s[j]);
+        //             j++;
+        //         }
+        //         ans = ans+1+s.size();
+        //     }
+        chars.clear();
+        for(auto it : v){
+            chars.push_back(it);
+        }
         
-        chars = s;
-       // cout<<s.size()<<endl;
-        return chars.size();
+        return ans;
+        
     }
 };
