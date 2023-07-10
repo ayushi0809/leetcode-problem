@@ -5,7 +5,7 @@ int main() {
     // Write C++ code here
     std::cout << "Hello world!" << endl;
     std::cout<<"Ayushi Khandelia" << endl;
-    std::cout<<"final";
+    std::cout<<"final"<<endl;
 
     return 0;
 }
