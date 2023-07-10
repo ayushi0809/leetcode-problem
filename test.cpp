@@ -6,7 +6,7 @@ int main() {
     std::cout << "Hello world!" << endl;
     std::cout<<"Ayushi Khandelia" << endl;
     std::cout<<"final"<<endl;
-    std::cout<<"run the code"<<endl;
+    std::cout<<"run the code";
 
     return 0;
 }
