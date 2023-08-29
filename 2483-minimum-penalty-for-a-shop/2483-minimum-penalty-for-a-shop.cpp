@@ -1,11 +1,12 @@
 class Solution {
 public:
     int bestClosingTime(string customers) {
-        vector<int>left(customers.size()+1,0);
-         vector<int>right(customers.size()+1,0);
+         int n = customers.size();
+        vector<int>left(n+1,0);
+         vector<int>right(n+1,0);
       
         
-        for(int i =0; i<customers.size(); i++){
+        for(int i =0; i<n; i++){
             if(customers[i] == 'Y'){
                 left[i+1] = left[i]+1;
                 right[i+1] = right[i];
@@ -19,9 +20,9 @@ public:
         
         int min_index= INT_MAX;
         int min_penality=INT_MAX;
-        int n = customers.size();
+       
         
-        for(int i = 0; i<customers.size()+1; i++){
+        for(int i = 0; i<n+1; i++){
             int p = left[n]-left[i]+right[i];
             cout<<p<<endl;
             if(p<min_penality){
